@@ -4,14 +4,16 @@ import react from "@vitejs/plugin-react-swc";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 
-// GitHub Pages serves the app from a repo sub-path (e.g. /ollama-rate-card/).
-// Update BASE_PATH to your repository name before deploying.
+// Base path per deploy target:
+// - Vercel serves at the domain root → "/"
+// - GitHub Pages serves from a repo sub-path (e.g. /ollama-rate-card/) —
+//   update BASE_PATH to your repository name before deploying there.
+// - BASE_PATH env var overrides everything.
+const isVercel = process.env.VERCEL === "1";
 const BASE_PATH = "/ollama-rate-card";
 
 export default defineConfig(({ command }) => ({
-  // In dev (local preview) serve at "/", but for production builds use the
-  // GitHub Pages sub-path (or a BASE_PATH env override).
-  base: command === "serve" ? "/" : (process.env.BASE_PATH ?? BASE_PATH),
+  base: command === "serve" ? "/" : (process.env.BASE_PATH ?? (isVercel ? "/" : BASE_PATH)),
   server: {
     host: "::",
     port: 8080,

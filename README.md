@@ -88,6 +88,15 @@ Effective prices assume your usage stays within the plan's monthly included cred
 - **effective price** = `listedPrice / multiplier`
 - **blended** = `(input × 3 + output) / 4` — a 3:1 input:output token ratio
 
+## Deploying to Vercel
+
+Vercel works out of the box — no config changes needed. The build detects Vercel's `VERCEL=1` environment variable automatically and serves the app at the domain root. Just:
+
+1. Import the repo in Vercel (framework preset: **Vite**).
+2. Deploy. Done.
+
+The included [`vercel.json`](vercel.json) routes all non-asset paths to `index.html` so client-side routing works.
+
 ## Deploying to GitHub Pages
 
 ### 1. Set your base path
@@ -98,7 +107,7 @@ GitHub Pages serves the app from `https://<user>.github.io/<repo-name>/`, so the
 const BASE_PATH = "/ollama-rate-card"; // ← change to your repo name
 ```
 
-> Tip: you can also override it per-build without editing the file: `BASE_PATH=/your-repo npm run build`.
+> Tip: you can also override it per-build without editing the file: `BASE_PATH=/your-repo npm run build`. Vercel deployments ignore this setting entirely (they always use `/`).
 
 ### 2. Deploy
 
