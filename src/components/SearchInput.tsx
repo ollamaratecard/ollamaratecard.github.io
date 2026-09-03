@@ -15,7 +15,7 @@ export function SearchInput({ value, onChange }: SearchInputProps) {
         onChange={(e) => onChange(e.target.value)}
         placeholder="Search models…"
         aria-label="Search models"
-        className="input input-lg h-12 w-full rounded-field border-base-300 pl-10 pr-10 font-bold text-base"
+        className="input input-lg h-12 w-full rounded-field border-base-300 bg-base-200 pl-10 pr-10 font-bold text-base shadow-inner focus:border-primary focus:ring-2 focus:ring-primary/30 focus:bg-base-100"
       />
       {value && (
         <button
