@@ -4,9 +4,9 @@ import react from "@vitejs/plugin-react-swc";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 
-// GitHub Pages serves the app from a repo sub-path (e.g. /tokenledger/).
+// GitHub Pages serves the app from a repo sub-path (e.g. /ollama-rate-card/).
 // Update BASE_PATH to your repository name before deploying.
-const BASE_PATH = "/tokenledger";
+const BASE_PATH = "/ollama-rate-card";
 
 export default defineConfig(({ command }) => ({
   // In dev (local preview) serve at "/", but for production builds use the

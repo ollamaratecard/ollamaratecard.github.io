@@ -1,8 +1,8 @@
-# TokenLedger
+# OllamaRateCard
 
-A playful, colorful LLM pricing comparison app. Compare listed token rates against the effective rates you get inside subscription plans (Pro Monthly, Pro Yearly, Max, Team), with sortable columns, inline price bars, and live search.
+A playful, colorful Ollama pricing comparison app. Compare listed token rates against the effective rates you get inside subscription plans (Pro Monthly, Pro Yearly, Max, Team), with sortable columns, inline price bars, and live search.
 
-Built with **Vite + React + TypeScript + Tailwind CSS v4**. No backend — all pricing data is a static TS file bundled at build time.
+Built with **Vite + React + TypeScript + Tailwind CSS v4 + daisyUI**. No backend — all pricing data is a static TS file bundled at build time.
 
 ## Features
 
@@ -11,6 +11,7 @@ Built with **Vite + React + TypeScript + Tailwind CSS v4**. No backend — all p
 - **Blended price** — `(input × 3 + output) / 4`, a 3:1 input:output token ratio, for both listed and effective rates.
 - **Search** — case-insensitive substring filter on model names.
 - **Responsive** — the table scrolls horizontally on narrow screens.
+- **Theme picker** — choose any built-in daisyUI theme (32 options) from the dropdown in the header. Your selection is saved to the browser and persists across sessions.
 - **Price bars** — each price cell includes a bar showing where the model sits relative to the dataset (green = cheap → red = expensive).
 
 ## Data
@@ -33,7 +34,7 @@ npm run preview   # preview the production build locally
 GitHub Pages serves your app from `https://<user>.github.io/<repo-name>/`, so the build must know the sub-path. Open [`vite.config.ts`](vite.config.ts) and update:
 
 ```ts
-const BASE_PATH = "/tokenledger"; // ← change to your repo name, e.g. "/token-ledger"
+const BASE_PATH = "/ollama-rate-card"; // ← change to your repo name
 ```
 
 > Tip: you can also override it per-build without editing the file: `BASE_PATH=/your-repo npm run build`.

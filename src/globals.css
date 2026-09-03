@@ -1,5 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "daisyui" {
+  themes: false;
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -147,12 +150,15 @@
   }
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-
-  body {
-    @apply bg-background text-foreground font-sans;
-  }
+/* daisyUI theme swatches shown in the theme picker dropdown */
+.theme-swatch {
+  display: inline-flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+.theme-swatch > span {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
 }

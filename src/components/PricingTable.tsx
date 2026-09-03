@@ -96,6 +96,7 @@ interface ColumnDef {
   align?: "left" | "right";
 }
 
+// "notes" stays sort-compatible (kept in SortKey) but has no rendered column.
 const columns: ColumnDef[] = [
   { key: "model", header: "Model", align: "left" },
   { key: "inputPer1M", header: "Input", sub: "listed $/1M", align: "right" },
@@ -105,7 +106,6 @@ const columns: ColumnDef[] = [
   { key: "effectiveOutput", header: "Effective output", sub: "$/1M w/ plan", align: "right" },
   { key: "blendedListed", header: "Blended (listed)", sub: "3:1 in:out", align: "right" },
   { key: "blendedEffective", header: "Blended (effective)", sub: "3:1 in:out, w/ plan", align: "right" },
-  { key: "notes", header: "Notes", align: "left" },
 ];
 
 const TIER_BARS = ["bg-success", "bg-teal-500", "bg-warning", "bg-destructive"];
@@ -192,7 +192,7 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
   return (
     <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-xl shadow-primary/10">
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[1080px] border-collapse text-sm">
+        <table className="w-full min-w-[1000px] border-collapse text-sm">
           <thead>
             <tr className="bg-muted/80">
               {columns.map((col) => {
@@ -259,15 +259,6 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
                   </div>
                 </td>
                 {priceCells(row)}
-                <td className="whitespace-nowrap px-4 py-3 text-left">
-                  {row.model.notes ? (
-                    <span className="inline-flex rounded-full bg-accent px-2.5 py-0.5 text-[11px] font-bold text-accent-foreground">
-                      {row.model.notes}
-                    </span>
-                  ) : (
-                    <span className="text-muted-foreground/50">—</span>
-                  )}
-                </td>
               </tr>
             ))}
           </tbody>
