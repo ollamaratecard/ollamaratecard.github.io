@@ -90,13 +90,13 @@ export default function Index() {
           </div>
           {/* Plan math */}
           <div className="mt-5 flex flex-wrap gap-3 text-sm font-bold">
-            <span className="badge badge-lg badge-secondary px-4 py-4 font-bold text-sm">
+            <span className="badge badge-lg badge-secondary px-4 py-4 font-bold">
               ${plan.monthlyCost}/mo cost
             </span>
             <span className="badge badge-lg badge-secondary px-4 py-4 font-bold">
               ${plan.monthlyCredits.toLocaleString()} included credits
             </span>
-            <span className="badge badge-lg badge-accent px-4 py-4 font-bold text-base">
+            <span className="badge badge-lg badge-accent px-4 py-4 font-bold">
               {multiplier.toFixed(2)}× effective multiplier
             </span>
           </div>
