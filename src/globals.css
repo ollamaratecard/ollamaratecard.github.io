@@ -1,92 +1,53 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+
+/* All built-in daisyUI themes, selectable at runtime via [data-theme] */
 @plugin "daisyui" {
-  themes: false;
+  themes: all;
 }
 
-@custom-variant dark (&:is(.dark *));
-
+/*
+  The app's components use shadcn-style tokens (bg-card, text-foreground,
+  bg-primary, ...). Map every one of them onto daisyUI's active theme variables
+  so the ThemePicker recolors the entire UI. Token names that daisyUI also
+  defines in @theme (--color-primary, --color-secondary, --color-accent,
+  --color-success, --color-warning) are intentionally NOT overridden here —
+  utilities like bg-primary resolve to daisyUI's themed values directly.
+*/
 :root {
-  --background: hsl(40 100% 97%);
-  --foreground: hsl(262 45% 15%);
-
-  --card: hsl(0 0% 100%);
-  --card-foreground: hsl(262 45% 15%);
-
-  --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(262 45% 15%);
-
-  --primary: hsl(262 83% 58%);
-  --primary-foreground: hsl(0 0% 100%);
-
-  --secondary: hsl(262 60% 95%);
-  --secondary-foreground: hsl(262 60% 32%);
-
-  --muted: hsl(45 60% 93%);
-  --muted-foreground: hsl(262 15% 45%);
-
-  --accent: hsl(292 84% 94%);
-  --accent-foreground: hsl(292 70% 35%);
-
-  --destructive: hsl(344 80% 56%);
-  --destructive-foreground: hsl(0 0% 100%);
-
-  --border: hsl(262 40% 88%);
-  --input: hsl(262 40% 86%);
-  --ring: hsl(262 83% 58%);
-
   --radius: 1rem;
 
-  --success: hsl(160 70% 36%);
-  --warning: hsl(28 95% 45%);
+  --background: var(--color-base-100);
+  --foreground: var(--color-base-content);
 
-  --sidebar-background: hsl(0 0% 100%);
-  --sidebar-foreground: hsl(262 45% 15%);
-  --sidebar-primary: hsl(262 83% 58%);
-  --sidebar-primary-foreground: hsl(0 0% 100%);
-  --sidebar-accent: hsl(262 60% 95%);
-  --sidebar-accent-foreground: hsl(262 60% 32%);
-  --sidebar-border: hsl(262 40% 88%);
-  --sidebar-ring: hsl(262 83% 58%);
-}
+  --card: var(--color-base-100);
+  --card-foreground: var(--color-base-content);
 
-.dark {
-  --background: hsl(262 45% 8%);
-  --foreground: hsl(40 60% 94%);
+  --popover: var(--color-base-100);
+  --popover-foreground: var(--color-base-content);
 
-  --card: hsl(262 35% 12%);
-  --card-foreground: hsl(40 60% 94%);
+  --primary-foreground: var(--color-primary-content);
+  --secondary-foreground: var(--color-secondary-content);
+  --accent-foreground: var(--color-accent-content);
 
-  --popover: hsl(262 35% 12%);
-  --popover-foreground: hsl(40 60% 94%);
+  --muted: var(--color-base-200);
+  --muted-foreground: color-mix(in oklab, var(--color-base-content) 60%, transparent);
 
-  --primary: hsl(262 90% 68%);
-  --primary-foreground: hsl(262 45% 10%);
+  --destructive: var(--color-error);
+  --destructive-foreground: var(--color-error-content);
 
-  --secondary: hsl(262 30% 20%);
-  --secondary-foreground: hsl(262 40% 88%);
+  --border: var(--color-base-300);
+  --input: var(--color-base-300);
+  --ring: var(--color-primary);
 
-  --muted: hsl(262 30% 18%);
-  --muted-foreground: hsl(262 15% 65%);
-
-  --accent: hsl(292 40% 22%);
-  --accent-foreground: hsl(292 70% 88%);
-
-  --destructive: hsl(344 80% 60%);
-  --destructive-foreground: hsl(0 0% 100%);
-
-  --border: hsl(262 30% 24%);
-  --input: hsl(262 30% 26%);
-  --ring: hsl(262 90% 68%);
-
-  --sidebar-background: hsl(262 35% 12%);
-  --sidebar-foreground: hsl(40 60% 94%);
-  --sidebar-primary: hsl(262 90% 68%);
-  --sidebar-primary-foreground: hsl(262 45% 10%);
-  --sidebar-accent: hsl(262 30% 20%);
-  --sidebar-accent-foreground: hsl(262 40% 88%);
-  --sidebar-border: hsl(262 30% 24%);
-  --sidebar-ring: hsl(262 90% 68%);
+  --sidebar-background: var(--color-base-100);
+  --sidebar-foreground: var(--color-base-content);
+  --sidebar-primary: var(--color-primary);
+  --sidebar-primary-foreground: var(--color-primary-content);
+  --sidebar-accent: var(--color-base-200);
+  --sidebar-accent-foreground: var(--color-base-content);
+  --sidebar-border: var(--color-base-300);
+  --sidebar-ring: var(--color-primary);
 }
 
 @theme inline {
@@ -96,21 +57,16 @@
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent-foreground: var(--accent-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-success: var(--success);
-  --color-warning: var(--warning);
   --color-sidebar: var(--sidebar-background);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -147,6 +103,16 @@
     to {
       height: 0;
     }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
   }
 }
 
