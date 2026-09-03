@@ -5,7 +5,6 @@
     "scripts": {
         "build": "vite build",
         "build:dev": "vite build --mode development",
-        "deploy": "gh-pages -d dist",
         "dev": "vite",
         "check:types": "tsc -p tsconfig.app.json",
         "lint": "biome check .",
@@ -52,7 +51,6 @@
         "daisyui": "^5.7.27",
         "date-fns": "^3.6.0",
         "embla-carousel-react": "^8.3.0",
-        "gh-pages": "^6.3.0",
         "input-otp": "^1.2.4",
         "lucide-react": "^0.462.0",
         "next-themes": "^0.3.0",

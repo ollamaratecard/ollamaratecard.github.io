@@ -80,42 +80,16 @@ Effective prices assume your usage stays within the plan's monthly included cred
 - **effective price** = `listedPrice / multiplier`
 - **blended** = `(input × 3 + output) / 4` — a 3:1 input:output token ratio
 
-## Deploying to Vercel
+## Deploying
 
-Vercel works out of the box — no config changes needed. The build emits **relative asset paths** (`./assets/...`), which work identically whether the site is served from a domain root (Vercel) or a sub-path (GitHub Pages). Just:
-
-1. Import the repo in Vercel (framework preset: **Vite**).
-2. Deploy. Done.
-
-The included [`vercel.json`](vercel.json) routes all non-asset paths to `index.html` so client-side routing works.
-
-## Deploying to GitHub Pages
-
-### 1. Set your base path
-
-GitHub Pages serves the app from `https://<user>.github.io/<repo-name>/`. The build uses relative asset paths by default, which already works — but if you prefer absolute paths, set the base in [`vite.config.ts`](vite.config.ts):
-
-No base-path editing needed — the build defaults to relative paths that work on both GitHub Pages and Vercel. (Legacy behavior: set `BASE_PATH=/your-repo` to force absolute paths.)
-
-> Tip: relative paths handle both hosts automatically. If you ever need absolute paths, override per-build: `BASE_PATH=/your-repo npm run build`.
-
-### 2. Deploy
-
-This repo ships with a GitHub Actions workflow at `.github/workflows/deploy.yml` that builds and publishes to GitHub Pages automatically on every push to `main` — it derives the base path from your repository name automatically.
+This repo deploys to **GitHub Pages** via the GitHub Actions workflow at `.github/workflows/deploy.yml` — it builds with bun and publishes on every push to `main`.
 
 One-time repo setup on GitHub:
 
 1. Go to **Settings → Pages**.
 2. Under **Build and deployment → Source**, select **GitHub Actions**.
 
-Then just push to `main` — the site will be live at `https://<user>.github.io/<repo-name>/`.
-
-### Manual deploy (alternative)
-
-```bash
-npm run build
-npx gh-pages -d dist
-```
+Then just push to `main` — the site is live at `https://ollamaratecard.github.io/`.
 
 ## Contributing
 
