@@ -70,7 +70,7 @@ export function ThemePicker() {
         <ul
           role="listbox"
           aria-label="Theme"
-          className="menu absolute right-0 z-50 mt-2 max-h-96 w-56 overflow-y-auto rounded-box border border-base-300 bg-base-100 p-2 shadow-xl"
+          className="menu absolute bottom-full right-0 z-50 mb-2 max-h-[min(24rem,60vh)] w-56 overflow-y-auto rounded-box border border-base-300 bg-base-100 p-2 shadow-xl"
         >
           {daisyThemes.map((t) => (
             <li key={t.id}>
