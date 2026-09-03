@@ -45,12 +45,13 @@ test("compare model pricing across plans with search", async ({ page }) => {
   // Sort order by blended effective is unchanged after plan switch
   await expect(rows.first().locator("td").first()).toContainText("nemotron-3-nano");
 
-  // Search filters live
+  // Search filters live; default sort (blended effective, low → high) puts
+  // gpt-oss:20b (cheapest blended) before gpt-oss:120b.
   const searchBox = page.getByLabel("Search models");
   await searchBox.fill("gpt-oss");
   await expect(rows).toHaveCount(2);
-  await expect(rows.first()).toContainText("gpt-oss:120b");
-  await expect(rows.nth(1)).toContainText("gpt-oss:20b");
+  await expect(rows.first()).toContainText("gpt-oss:20b");
+  await expect(rows.nth(1)).toContainText("gpt-oss:120b");
 
   // Clear via × button restores the full table
   await page.getByRole("button", { name: "Clear search" }).click();
