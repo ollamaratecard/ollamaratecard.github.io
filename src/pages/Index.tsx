@@ -43,7 +43,7 @@ export default function Index() {
   const multiplier = multiplierFor(plan);
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,rgba(124,58,237,0.08),transparent_55%)]">
+    <div className="theme-glow min-h-screen">
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
         {/* Header */}
         <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">

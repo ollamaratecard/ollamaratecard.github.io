@@ -108,7 +108,8 @@ const columns: ColumnDef[] = [
   { key: "blendedEffective", header: "Blended (effective)", sub: "3:1 in:out, w/ plan", align: "right" },
 ];
 
-const TIER_BARS = ["bg-success", "bg-teal-500", "bg-warning", "bg-destructive"];
+// Tier colors derive from the active daisyUI theme (cheap → expensive)
+const TIER_BARS = ["tier-0", "tier-1", "tier-2", "tier-3"];
 
 function tierFor(value: number, max: number, min: number): number {
   if (max <= min) return 0;
@@ -249,8 +250,8 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
                   <div className="flex items-center gap-2.5">
                     <span
                       className={cn(
-                        "grid h-7 w-7 shrink-0 place-items-center rounded-lg text-xs font-black text-white",
-                        ["bg-primary", "bg-fuchsia-500", "bg-orange-500", "bg-teal-500"][i % 4]
+                        "grid h-7 w-7 shrink-0 place-items-center rounded-lg text-xs font-black",
+                        ["avatar-0", "avatar-1", "avatar-2", "avatar-3"][i % 4]
                       )}
                     >
                       {row.model.model.charAt(0).toUpperCase()}
