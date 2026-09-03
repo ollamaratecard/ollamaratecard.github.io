@@ -2,7 +2,7 @@
 
 A playful, colorful LLM pricing comparison app. Compare listed token rates against the effective rates you get inside subscription plans (Pro Monthly, Pro Yearly, Max, Team), with sortable columns, inline price bars, and live search.
 
-Built with **Vite + React + TypeScript + Tailwind CSS v4 + daisyUI**. No backend — all pricing data is a static TS file bundled at build time.
+Built with **Vite + React + TypeScript + Tailwind CSS v4 + daisyUI** (custom theme). No backend — all pricing data is a static TS file bundled at build time.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
@@ -13,7 +13,6 @@ Built with **Vite + React + TypeScript + Tailwind CSS v4 + daisyUI**. No backend
 - **Blended price** — `(input × 3 + output) / 4`, a 3:1 input:output token ratio, for both listed and effective rates.
 - **Search** — case-insensitive substring filter on model names, with a clear button.
 - **Responsive** — the table scrolls horizontally on narrow screens.
-- **Theme picker** — choose any built-in daisyUI theme (32 options) from the dropdown in the header. Your selection is saved to the browser and persists across sessions.
 - **Price bars** — each price cell includes a bar showing where the model sits relative to the dataset, using the theme's own status colors (cheap → expensive).
 
 ## Onboarding
@@ -37,7 +36,6 @@ The app opens with a pricing table of 19 models on the Pro (Monthly) plan. Try:
 - Clicking a column header (e.g. **Output**) to sort by it
 - Switching the plan to **Team** and watching effective prices recalculate
 - Typing `kimi` in the search box
-- Picking **Dracula** or **Synthwave** from the theme dropdown
 
 ### 2. Project structure
 
@@ -70,8 +68,6 @@ e2e-tests/               # Playwright specs (npm test)
 The table, sorting, bars, and blended calculations pick it up automatically. Prices are per **million tokens, USD**.
 
 **Add or change a plan** — edit [`src/data/plans.ts`](src/data/plans.ts). The effective multiplier is computed from `monthlyCredits / monthlyCost`; everything else derives from it.
-
-**Add a theme to the picker** — edit [`src/data/themes.ts`](src/data/themes.ts). All daisyUI built-in themes are already enabled in CSS (`themes: all` in [`src/globals.css`](src/globals.css)); the registry only controls what appears in the dropdown and the swatch colors.
 
 **Run the tests**
 

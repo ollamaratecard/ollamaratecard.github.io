@@ -1,18 +1,53 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* All built-in daisyUI themes, selectable at runtime via [data-theme] */
+/* Only the designer's custom theme is used; it is the default for all visitors */
 @plugin "daisyui" {
-  themes: all;
+  themes: false;
+}
+
+@plugin "daisyui/theme" {
+  name: "halloween";
+  default: true;
+  prefersdark: false;
+  color-scheme: "dark";
+  --color-base-100: oklch(21% 0.006 56.043);
+  --color-base-200: oklch(14% 0.004 49.25);
+  --color-base-300: oklch(0% 0 0);
+  --color-base-content: oklch(84.955% 0 0);
+  --color-primary: oklch(68.2% 0.204 60.620);
+  --color-primary-content: oklch(19.693% 0.004 196.779);
+  --color-secondary: oklch(29.4% 0.248 305.030);
+  --color-secondary-content: oklch(89.196% 0.049 305.03);
+  --color-accent: oklch(60.6% 0.223 136.073);
+  --color-accent-content: oklch(0% 0 0);
+  --color-neutral: oklch(24.371% 0.046 65.681);
+  --color-neutral-content: oklch(84.874% 0.009 65.681);
+  --color-info: oklch(48.3% 0.215 262.880);
+  --color-info-content: oklch(90.923% 0.043 262.88);
+  --color-success: oklch(58.1% 0.169 149.213);
+  --color-success-content: oklch(12.541% 0.033 149.213);
+  --color-warning: oklch(59.2% 0.160 58.318);
+  --color-warning-content: oklch(13.316% 0.031 58.318);
+  --color-error: oklch(61% 0.219 27.330);
+  --color-error-content: oklch(13.144% 0.039 27.33);
+  --radius-selector: 1rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
 }
 
 /*
-  The app's components use shadcn-style tokens (bg-card, text-foreground,
-  bg-primary, ...). Map every one of them onto daisyUI's active theme variables
-  so the ThemePicker recolors the entire UI. Token names that daisyUI also
-  defines in @theme (--color-primary, --color-secondary, --color-accent,
-  --color-success, --color-warning) are intentionally NOT overridden here —
-  utilities like bg-primary resolve to daisyUI's themed values directly.
+  The app's components use shadcn-style tokens (bg-card, text-foreground, ...).
+  Map every one of them onto the theme variables so all components recolor
+  together. Token names daisyUI also defines in @theme (--color-primary,
+  --color-secondary, --color-accent, --color-success, --color-warning) are
+  intentionally NOT overridden here — utilities like bg-primary resolve to the
+  theme directly.
 */
 :root {
   --radius: 1rem;
@@ -118,17 +153,4 @@
   body {
     @apply bg-background text-foreground font-sans;
   }
-}
-
-/* daisyUI theme swatches shown in the theme picker dropdown */
-.theme-swatch {
-  display: inline-flex;
-  gap: 2px;
-  flex-shrink: 0;
-}
-.theme-swatch > span {
-  display: block;
-  width: 8px;
-  height: 8px;
-  border-radius: 9999px;
 }

@@ -3,7 +3,6 @@ import { Info, Sparkles } from "lucide-react";
 import { AppLogo } from "@/components/AppLogo";
 import { PlanToggle } from "@/components/PlanToggle";
 import { SearchInput } from "@/components/SearchInput";
-import { ThemePicker } from "@/components/ThemePicker";
 import {
   PricingTable,
   buildRows,
@@ -58,12 +57,9 @@ export default function Index() {
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-2 self-start">
-            <div className="badge badge-lg badge-outline gap-2 p-4 font-bold">
-              <Sparkles className="h-4 w-4 text-primary" aria-hidden />
-              {plans.length} plans · {multiplier.toFixed(1)}× effective
-            </div>
-            <ThemePicker />
+          <div className="badge badge-lg badge-outline gap-2 p-4 font-bold">
+            <Sparkles className="h-4 w-4 text-primary" aria-hidden />
+            {plans.length} plans · {multiplier.toFixed(1)}× effective
           </div>
         </header>
 
