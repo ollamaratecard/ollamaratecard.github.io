@@ -1,5 +1,4 @@
 import { ArrowDown, ArrowUp } from 'lucide-react';
-import { useMemo } from 'react';
 import { type ModelPrice, models } from '@/data/models';
 import { multiplierFor, type Plan } from '@/data/plans';
 import { cn } from '@/lib/utils';
@@ -108,54 +107,7 @@ const columns: ColumnDef[] = [
     { key: 'blendedEffective', header: 'Blended (effective)', sub: '3:1 in:out, w/ plan', align: 'right' },
 ];
 
-// Tier bars use the theme's own status colors (cheap → expensive)
-const TIER_BARS = ['bg-success', 'bg-warning', 'bg-error', 'bg-neutral'];
-
-function tierFor(value: number, max: number, min: number): number {
-    if (max <= min) return 0;
-    const t = (value - min) / (max - min);
-    return Math.min(TIER_BARS.length - 1, Math.floor(t * TIER_BARS.length));
-}
-
 export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTableProps) {
-    const bounds = useMemo(() => {
-        const all = rows.flatMap((r) => [
-            r.model.inputPer1M,
-            r.model.cachedInputPer1M ?? null,
-            r.model.outputPer1M,
-            r.effectiveInput,
-            r.effectiveOutput,
-            r.blendedListed,
-            r.blendedEffective,
-        ]);
-        const colBound = (i: number, mode: 'min' | 'max', fallback: number) => {
-            const vals = all.filter((_, idx) => idx % 7 === i && all[idx] !== null) as number[];
-            if (!vals.length) return fallback;
-            return mode === 'min' ? Math.min(...vals) : Math.max(...vals);
-        };
-        return {
-            input: [colBound(0, 'min', 0), colBound(0, 'max', 1)],
-            cached: [colBound(1, 'min', 0), colBound(1, 'max', 1)],
-            output: [colBound(2, 'min', 0), colBound(2, 'max', 1)],
-            effInput: [colBound(3, 'min', 0), colBound(3, 'max', 1)],
-            effOutput: [colBound(4, 'min', 0), colBound(4, 'max', 1)],
-            blendedListed: [colBound(5, 'min', 0), colBound(5, 'max', 1)],
-            blendedEffective: [colBound(6, 'min', 0), colBound(6, 'max', 1)],
-        } as Record<string, [number, number]>;
-    }, [rows]);
-
-    const barFor = (key: SortKey, value: number): { pct: number; tier: number } | null => {
-        const bound = bounds[key];
-        if (!bound) return null;
-        const [min, max] = bound;
-        return {
-            pct: Math.max(4, Math.min(100, (value / max) * 100)),
-            tier: tierFor(value, max, min),
-        };
-    };
-
-    const sortIndex = columns.findIndex((c) => c.key === sortKey);
-
     const priceCells = (row: Row) =>
         (
             [
@@ -167,23 +119,17 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
                 { key: 'blendedListed' as const, value: row.blendedListed },
                 { key: 'blendedEffective' as const, value: row.blendedEffective },
             ] as const
-        ).map(({ key, value }) => {
-            const bar = value == null ? null : barFor(key, value);
-            return (
-                <td key={key} className="whitespace-nowrap px-3 py-3 text-right font-mono tabular-nums">
-                    {value == null ? (
-                        <span className="text-base-content/50">—</span>
-                    ) : (
-                        <span
-                            className={cn('font-bold', sortKey === key && 'text-primary')}
-                            title={bar ? `Relative cost: ${bar.pct}% of priciest` : undefined}
-                        >
-                            {fmt(value)}
-                        </span>
-                    )}
-                </td>
-            );
-        });
+        ).map(({ key, value }) => (
+            <td key={key} className="whitespace-nowrap px-3 py-3 text-right font-mono tabular-nums">
+                {value == null ? (
+                    <span className="text-base-content/50">—</span>
+                ) : (
+                    <span className={cn('font-bold', sortKey === key && 'text-primary')}>{fmt(value)}</span>
+                )}
+            </td>
+        ));
+
+    const sortIndex = columns.findIndex((c) => c.key === sortKey);
 
     return (
         <div className="rounded-box border border-base-300 bg-base-100">

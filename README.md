@@ -1,6 +1,6 @@
 # OllamaRateCard
 
-A playful, colorful LLM pricing comparison app. Compare listed token rates against the effective rates you get inside subscription plans (Pro Monthly, Pro Yearly, Max, Team), with sortable columns, inline price bars, and live search.
+A playful, colorful LLM pricing comparison app. Compare listed token rates against the effective rates you get inside subscription plans (Pro Monthly, Pro Yearly, Max, Team), with sortable columns and live search.
 
 Built with **Vite + React + TypeScript + Tailwind CSS v4 + daisyUI** (custom theme). No backend — all pricing data is a static TS file bundled at build time.
 
@@ -13,7 +13,6 @@ Built with **Vite + React + TypeScript + Tailwind CSS v4 + daisyUI** (custom the
 - **Blended price** — `(input × 3 + output) / 4`, a 3:1 input:output token ratio, for both listed and effective rates.
 - **Search** — case-insensitive substring filter on model names, with a clear button.
 - **Responsive** — the table scrolls horizontally on narrow screens.
-- **Price bars** — each price cell includes a bar showing where the model sits relative to the dataset, using the theme's own status colors (cheap → expensive).
 
 ## Onboarding
 
@@ -21,14 +20,13 @@ New to the project? Here's the 5-minute tour:
 
 ### Prerequisites
 
-- **Node.js 20+** (check with `node --version`)
-- **npm** (ships with Node)
+- **Bun** (check with `bun --version`)
 
 ### 1. Install and run
 
 ```bash
-npm install       # install dependencies
-npm run dev       # start dev server → http://localhost:8080
+bun install       # install dependencies
+bun run dev       # start dev server → http://localhost:8080
 ```
 
 The app opens with a pricing table of 19 models on the Pro (Monthly) plan. Try:
@@ -42,19 +40,17 @@ The app opens with a pricing table of 19 models on the Pro (Monthly) plan. Try:
 ```
 src/
 ├── components/          # UI components
-│   ├── PricingTable.tsx     # sortable table + price bars (core of the app)
+│   ├── PricingTable.tsx     # sortable table (core of the app)
 │   ├── PlanToggle.tsx       # plan segmented control
 │   ├── SearchInput.tsx      # search box with clear button
-│   ├── ThemePicker.tsx      # daisyUI theme dropdown (localStorage-persisted)
 │   └── AppLogo.tsx          # logo mark
 ├── data/                # ← EDIT HERE to update content
 │   ├── models.ts            # model pricing (per 1M tokens, USD)
-│   ├── plans.ts             # subscription plan definitions
-│   └── themes.ts            # theme registry for the picker
+│   └── plans.ts             # subscription plan definitions
 ├── pages/
 │   └── Index.tsx            # the single page: header, controls, table
 └── globals.css          # Tailwind v4 + daisyUI config and token bridge
-e2e-tests/               # Playwright specs (npm test)
+e2e-tests/               # Playwright specs (bun run test:e2e)
 ```
 
 ### 3. Common tasks
@@ -65,7 +61,7 @@ e2e-tests/               # Playwright specs (npm test)
 { model: "my-new-model", inputPer1M: 0.5, cachedInputPer1M: 0.1, outputPer1M: 2.0, notes?: "promo" }
 ```
 
-The table, sorting, bars, and blended calculations pick it up automatically. Prices are per **million tokens, USD**.
+The table, sorting, and blended calculations pick it up automatically. Prices are per **million tokens, USD**.
 
 **Add or change a plan** — edit [`src/data/plans.ts`](src/data/plans.ts). The effective multiplier is computed from `monthlyCredits / monthlyCost`; everything else derives from it.
 
@@ -73,7 +69,7 @@ The table, sorting, bars, and blended calculations pick it up automatically. Pri
 
 ```bash
 npx playwright install   # one-time browser install
-npm run test:e2e         # run all specs in e2e-tests/
+bun run test:e2e         # run all specs in e2e-tests/
 ```
 
 ### 4. How effective pricing works
@@ -127,7 +123,7 @@ PRs welcome! Please:
 
 1. Keep changes minimal and focused
 2. Add or update an e2e spec in `e2e-tests/` for user-facing behavior
-3. Run `npx tsc --noEmit` and the test suite before submitting
+3. Run `bun run check:types` and the test suite before submitting
 
 ## License
 
