@@ -90,7 +90,7 @@ Effective prices assume your usage stays within the plan's monthly included cred
 
 ## Deploying to Vercel
 
-Vercel works out of the box — no config changes needed. The build detects Vercel's `VERCEL=1` environment variable automatically and serves the app at the domain root. Just:
+Vercel works out of the box — no config changes needed. The build emits **relative asset paths** (`./assets/...`), which work identically whether the site is served from a domain root (Vercel) or a sub-path (GitHub Pages). Just:
 
 1. Import the repo in Vercel (framework preset: **Vite**).
 2. Deploy. Done.
@@ -101,13 +101,11 @@ The included [`vercel.json`](vercel.json) routes all non-asset paths to `index.h
 
 ### 1. Set your base path
 
-GitHub Pages serves the app from `https://<user>.github.io/<repo-name>/`, so the build must know the sub-path. Open [`vite.config.ts`](vite.config.ts) and update:
+GitHub Pages serves the app from `https://<user>.github.io/<repo-name>/`. The build uses relative asset paths by default, which already works — but if you prefer absolute paths, set the base in [`vite.config.ts`](vite.config.ts):
 
-```ts
-const BASE_PATH = "/ollama-rate-card"; // ← change to your repo name
-```
+No base-path editing needed — the build defaults to relative paths that work on both GitHub Pages and Vercel. (Legacy behavior: set `BASE_PATH=/your-repo` to force absolute paths.)
 
-> Tip: you can also override it per-build without editing the file: `BASE_PATH=/your-repo npm run build`. Vercel deployments ignore this setting entirely (they always use `/`).
+> Tip: relative paths handle both hosts automatically. If you ever need absolute paths, override per-build: `BASE_PATH=/your-repo npm run build`.
 
 ### 2. Deploy
 

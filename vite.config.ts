@@ -4,16 +4,14 @@ import react from "@vitejs/plugin-react-swc";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 
-// Base path per deploy target:
-// - Vercel serves at the domain root → "/"
-// - GitHub Pages serves from a repo sub-path (e.g. /ollama-rate-card/) —
-//   update BASE_PATH to your repository name before deploying there.
-// - BASE_PATH env var overrides everything.
-const isVercel = process.env.VERCEL === "1";
-const BASE_PATH = "/ollama-rate-card";
+// Base path: relative "./" works everywhere — Vercel (domain root), GitHub
+// Pages (repo sub-path), and local preview — because all asset URLs are
+// emitted relative to index.html's location. Override with BASE_PATH env var
+// if you need absolute paths.
+const BASE_PATH = process.env.BASE_PATH ?? "./";
 
-export default defineConfig(({ command }) => ({
-  base: command === "serve" ? "/" : (process.env.BASE_PATH ?? (isVercel ? "/" : BASE_PATH)),
+export default defineConfig(() => ({
+  base: BASE_PATH,
   server: {
     host: "::",
     port: 8080,
