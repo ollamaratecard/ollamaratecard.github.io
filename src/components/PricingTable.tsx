@@ -247,10 +247,10 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
             {rows.map((row, i) => (
               <tr key={row.model.model} className="hover:bg-base-200">
                 <td className="whitespace-nowrap px-4 py-3">
-                  <div className="flex items-center gap-2.5">
+                  <div className="flex items-center gap-3">
                     <span
                       className={cn(
-                        "badge font-bold",
+                        "badge badge-lg px-3 font-bold",
                         ["badge-primary", "badge-secondary", "badge-accent", "badge-neutral"][i % 4]
                       )}
                     >
