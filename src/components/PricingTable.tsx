@@ -204,7 +204,7 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
                     scope="col"
                     aria-sort={active ? (sortDir === "asc" ? "ascending" : "descending") : undefined}
                     className={cn(
-                      "whitespace-nowrap px-4 py-3.5 text-xs font-bold uppercase tracking-wide",
+                      "whitespace-nowrap px-4 py-3.5 text-sm font-bold uppercase tracking-wide",
                       col.align === "right" ? "text-right" : "text-left",
                       active ? "text-primary" : "text-base-content/60"
                     )}
@@ -223,7 +223,7 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
                         ))}
                     </button>
                     {col.sub && (
-                      <span className="block text-[10px] font-medium normal-case tracking-normal text-base-content/50">
+                      <span className="block text-xs font-medium normal-case tracking-normal text-base-content/50">
                         {col.sub}
                       </span>
                     )}
@@ -256,7 +256,7 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
                     >
                       {row.model.model.charAt(0).toUpperCase()}
                     </span>
-                    <span className="font-mono text-[13px] font-bold">{row.model.model}</span>
+                    <span className="font-mono text-sm font-bold">{row.model.model}</span>
                   </div>
                 </td>
                 {priceCells(row)}
@@ -265,7 +265,7 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
           </tbody>
         </table>
       </div>
-      <div className="border-t border-base-300 bg-base-200/50 px-4 py-2.5 text-xs font-medium text-base-content/70">
+      <div className="border-t border-base-300 bg-base-200/50 px-4 py-2.5 text-sm font-medium text-base-content/70">
         Showing <span className="font-bold text-base-content">{rows.length}</span> of{" "}
         <span className="font-bold text-base-content">{models.length}</span> models · sorted by{" "}
         <span className="font-bold text-primary">

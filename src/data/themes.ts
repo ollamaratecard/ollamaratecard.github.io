@@ -42,4 +42,4 @@ export const daisyThemes: DaisyTheme[] = [
   { id: "sunset", label: "Sunset", swatch: ["#ff4059", "#ff7f4d", "#2b1c50"], dark: true },
 ];
 
-export const DEFAULT_THEME = "cupcake";
+export const DEFAULT_THEME = "dracula";

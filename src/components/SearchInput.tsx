@@ -9,16 +9,14 @@ export function SearchInput({ value, onChange }: SearchInputProps) {
   return (
     <div className="relative w-full sm:w-72">
       <Search className="pointer-events-none absolute left-3.5 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-base-content/50" />
-      <label className="input input-bordered flex h-11 w-full items-center gap-2 rounded-field pl-10 pr-10 font-bold">
-        <input
-          type="text"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder="Search models…"
-          aria-label="Search models"
-          className="w-full bg-transparent font-bold outline-none placeholder:text-base-content/50"
-        />
-      </label>
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder="Search models…"
+        aria-label="Search models"
+        className="input input-lg h-12 w-full rounded-field pl-10 pr-10 font-bold text-base"
+      />
       {value && (
         <button
           type="button"

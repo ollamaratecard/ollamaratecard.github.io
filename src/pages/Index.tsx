@@ -77,7 +77,7 @@ export default function Index() {
               <div className="mt-3">
                 <PlanToggle plans={plans} selectedId={planId} onSelect={setPlanId} />
               </div>
-              <p className="mt-3 flex max-w-xl items-start gap-2 text-xs font-medium text-base-content/60">
+              <p className="mt-3 flex max-w-xl items-start gap-2 text-sm font-medium text-base-content/60">
                 <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" aria-hidden />
                 Your plan's monthly credits are what make these rates cheaper than listed. Once you
                 use them up, pricing reverts to standard.
@@ -93,14 +93,14 @@ export default function Index() {
             </div>
           </div>
           {/* Plan math */}
-          <div className="mt-5 flex flex-wrap gap-3 text-xs font-bold">
-            <span className="badge badge-lg badge-secondary px-4 py-4 font-bold">
+          <div className="mt-5 flex flex-wrap gap-3 text-sm font-bold">
+            <span className="badge badge-lg badge-secondary px-4 py-4 font-bold text-sm">
               ${plan.monthlyCost}/mo cost
             </span>
             <span className="badge badge-lg badge-secondary px-4 py-4 font-bold">
               ${plan.monthlyCredits.toLocaleString()} included credits
             </span>
-            <span className="badge badge-lg badge-accent px-4 py-4 font-bold">
+            <span className="badge badge-lg badge-accent px-4 py-4 font-bold text-base">
               {multiplier.toFixed(2)}× effective multiplier
             </span>
           </div>
@@ -117,7 +117,7 @@ export default function Index() {
           />
         </section>
 
-        <footer className="mt-8 pb-4 text-center text-xs font-medium text-base-content/60">
+        <footer className="mt-8 pb-4 text-center text-sm font-medium text-base-content/60">
           Prices are manually curated in <code className="font-mono">src/data/models.ts</code> and
           valued at listed rates. Not affiliated with any model provider.
         </footer>
