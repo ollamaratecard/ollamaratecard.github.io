@@ -11,8 +11,7 @@ export type SortKey =
     | 'effectiveInput'
     | 'effectiveOutput'
     | 'blendedListed'
-    | 'blendedEffective'
-    | 'notes';
+    | 'blendedEffective';
 
 export type SortDir = 'asc' | 'desc';
 
@@ -59,8 +58,6 @@ export function sortRows(rows: Row[], key: SortKey, dir: SortDir): Row[] {
                 return row.blendedListed;
             case 'blendedEffective':
                 return row.blendedEffective;
-            case 'notes':
-                return row.model.notes ?? '';
         }
     };
     return [...rows].sort((a, b) => {

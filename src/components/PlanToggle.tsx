@@ -8,8 +8,7 @@ interface PlanToggleProps {
 
 export function PlanToggle({ plans, selectedId, onSelect }: PlanToggleProps) {
     return (
-        <div
-            role="tablist"
+        <fieldset
             aria-label="Subscription plan"
             className="inline-flex flex-wrap gap-1 rounded-box border border-base-300 bg-base-200 p-1.5"
         >
@@ -19,8 +18,7 @@ export function PlanToggle({ plans, selectedId, onSelect }: PlanToggleProps) {
                     <button
                         key={plan.id}
                         type="button"
-                        role="tab"
-                        aria-selected={active}
+                        aria-pressed={active}
                         onClick={() => onSelect(plan.id)}
                         className={`btn btn-sm rounded-field px-4 ${active ? 'btn-primary' : 'btn-ghost'}`}
                     >
@@ -28,6 +26,6 @@ export function PlanToggle({ plans, selectedId, onSelect }: PlanToggleProps) {
                     </button>
                 );
             })}
-        </div>
+        </fieldset>
     );
 }

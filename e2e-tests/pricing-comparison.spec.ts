@@ -11,11 +11,11 @@ test('compare model pricing across plans with search', async ({ page }) => {
 
     // Table renders all models, default plan is Pro (Monthly) with a 3.00× multiplier
     await expect(page.getByRole('heading', { name: /OllamaRateCard/i })).toBeVisible();
-    const planTabs = page.getByRole('tablist', { name: 'Subscription plan' });
-    await expect(planTabs.getByRole('tab', { name: 'Pro (Monthly)' })).toHaveAttribute('aria-selected', 'true');
-    await expect(planTabs.getByRole('tab', { name: 'Pro (Yearly)' })).toBeVisible();
-    await expect(planTabs.getByRole('tab', { name: 'Max' })).toBeVisible();
-    await expect(planTabs.getByRole('tab', { name: 'Team' })).toBeVisible();
+    const planToggle = page.getByRole('group', { name: 'Subscription plan' });
+    await expect(planToggle.getByRole('button', { name: 'Pro (Monthly)' })).toHaveAttribute('aria-pressed', 'true');
+    await expect(planToggle.getByRole('button', { name: 'Pro (Yearly)' })).toBeVisible();
+    await expect(planToggle.getByRole('button', { name: 'Max' })).toBeVisible();
+    await expect(planToggle.getByRole('button', { name: 'Team' })).toBeVisible();
 
     const rows = page.locator('table tbody tr');
     await expect(rows).toHaveCount(19);
@@ -32,8 +32,8 @@ test('compare model pricing across plans with search', async ({ page }) => {
     await expect(kimiOutputEffective).toContainText('$5.00');
 
     // Switch to Team (1000/500 = 2×): effective output becomes $7.50
-    await planTabs.getByRole('tab', { name: 'Team' }).click();
-    await expect(planTabs.getByRole('tab', { name: 'Team' })).toHaveAttribute('aria-selected', 'true');
+    await planToggle.getByRole('button', { name: 'Team' }).click();
+    await expect(planToggle.getByRole('button', { name: 'Team' })).toHaveAttribute('aria-pressed', 'true');
     await expect(kimiOutputEffective).toContainText('$7.50');
 
     // Sort order by blended effective is unchanged after plan switch

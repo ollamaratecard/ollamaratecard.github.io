@@ -73,7 +73,8 @@ export default function Index() {
                     </div>
                     <div className="badge badge-lg badge-outline gap-2 p-4 font-bold">
                         <Sparkles className="h-4 w-4 text-primary" aria-hidden />
-                        {plans.length} plans · {multiplier.toFixed(1)}× effective
+                        {plans.length} plans · up to {Math.max(...plans.map((p) => multiplierFor(p))).toFixed(1)}×
+                        effective
                     </div>
                 </header>
 
