@@ -1,7 +1,7 @@
-export function AppLogo({ className = "h-11 w-11" }: { className?: string }) {
+export function AppLogo({ className = "h-25 w-25" }: { className?: string }) {
   return (
     <img
-      src="./logo.png"
+      src="./ollama-rate-card-logo-v2-512x.png"
       alt="OllamaRateCard logo"
       className={`${className} shrink-0 object-contain`}
     />

@@ -64,7 +64,7 @@ export default function Index() {
         </header>
 
         {/* Controls */}
-        <section className="card mt-8 border border-base-300 bg-base-100 p-5 sm:p-6">
+        <section className="card mt-4 border border-base-300 bg-base-100 p-5 sm:p-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div>
               <h2 className="text-sm font-bold uppercase tracking-wide text-base-content/60">
