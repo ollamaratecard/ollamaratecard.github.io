@@ -45,6 +45,14 @@ export function ThemePicker() {
   }, [open]);
 
   const current = daisyThemes.find((t) => t.id === theme) ?? daisyThemes[0];
+  const listRef = useRef<HTMLUListElement>(null);
+
+  // When opening, scroll the active theme into view inside the dropdown
+  useEffect(() => {
+    if (!open) return;
+    const active = listRef.current?.querySelector('[aria-selected="true"]');
+    active?.scrollIntoView({ block: "nearest" });
+  }, [open]);
 
   const pick = (t: DaisyTheme) => {
     setTheme(t.id);
@@ -68,9 +76,10 @@ export function ThemePicker() {
 
       {open && (
         <ul
+          ref={listRef}
           role="listbox"
           aria-label="Theme"
-          className="menu absolute right-0 top-full z-50 mt-2 max-h-[min(24rem,70vh)] w-56 overflow-y-auto rounded-box border border-base-300 bg-base-100 p-2 shadow-xl"
+          className="absolute right-0 top-full z-50 mt-2 flex max-h-[min(24rem,70vh)] w-56 flex-col overflow-y-auto rounded-box border border-base-300 bg-base-100 p-2 shadow-xl"
         >
           {daisyThemes.map((t) => (
             <li key={t.id}>
