@@ -1,10 +1,11 @@
 import { Info, Sparkles } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { AppLogo } from '@/components/AppLogo';
 import { PlanToggle } from '@/components/PlanToggle';
 import { buildRows, PricingTable, type SortDir, type SortKey, sortRows } from '@/components/PricingTable';
 import { SearchInput } from '@/components/SearchInput';
 import { multiplierFor, plans } from '@/data/plans';
+import { track } from '@/lib/analytics';
 
 const DEFAULT_SORT: { key: SortKey; dir: SortDir } = {
     key: 'blendedEffective',
@@ -26,7 +27,30 @@ export default function Index() {
     }, [plan, search, sort]);
 
     const handleSort = (key: SortKey) => {
-        setSort((prev) => (prev.key === key ? { key, dir: prev.dir === 'asc' ? 'desc' : 'asc' } : { key, dir: 'asc' }));
+        setSort((prev) => {
+            const dir: SortDir = prev.key === key ? (prev.dir === 'asc' ? 'desc' : 'asc') : 'asc';
+            track('table sort', { column: key, direction: dir });
+            return { key, dir };
+        });
+    };
+
+    const handlePlanSelect = (id: string) => {
+        setPlanId(id);
+        track('plan select', { plan: id });
+    };
+
+    // Fire search event once the user pauses typing, with the final query.
+    const searchTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+    useEffect(() => {
+        return () => clearTimeout(searchTimer.current);
+    }, []);
+    const handleSearch = (value: string) => {
+        setSearch(value);
+        clearTimeout(searchTimer.current);
+        if (!value.trim()) return;
+        searchTimer.current = setTimeout(() => {
+            track('model search', { query: value.trim() });
+        }, 800);
     };
 
     const multiplier = multiplierFor(plan);
@@ -61,7 +85,7 @@ export default function Index() {
                                 Subscription plan
                             </h2>
                             <div className="mt-3">
-                                <PlanToggle plans={plans} selectedId={planId} onSelect={setPlanId} />
+                                <PlanToggle plans={plans} selectedId={planId} onSelect={handlePlanSelect} />
                             </div>
                             <p className="mt-3 flex max-w-xl items-start gap-2 text-sm font-medium text-base-content/60">
                                 <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" aria-hidden />
@@ -74,7 +98,7 @@ export default function Index() {
                                 Find a model
                             </h2>
                             <div className="mt-3">
-                                <SearchInput value={search} onChange={setSearch} />
+                                <SearchInput value={search} onChange={handleSearch} />
                             </div>
                         </div>
                     </div>
