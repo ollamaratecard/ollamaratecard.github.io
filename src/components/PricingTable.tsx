@@ -193,7 +193,7 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
   return (
     <div className="rounded-box border border-base-300 bg-base-100">
       <div className="overflow-x-auto">
-        <table className="table table-sm w-full min-w-[1000px]">
+        <table className="table w-full min-w-[1000px]">
           <thead>
             <tr className="bg-base-200">
               {columns.map((col) => {
@@ -250,7 +250,7 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
                   <div className="flex items-center gap-2.5">
                     <span
                       className={cn(
-                        "badge badge-sm font-bold",
+                        "badge font-bold",
                         ["badge-primary", "badge-secondary", "badge-accent", "badge-neutral"][i % 4]
                       )}
                     >
