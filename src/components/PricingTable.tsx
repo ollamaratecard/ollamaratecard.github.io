@@ -187,7 +187,7 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
 
     return (
         <div className="rounded-box border border-base-300 bg-base-100">
-            <div>
+            <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
                         <tr className="bg-base-200">
