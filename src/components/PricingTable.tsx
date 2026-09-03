@@ -170,21 +170,16 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
     ).map(({ key, value }) => {
       const bar = value == null ? null : barFor(key, value);
       return (
-        <td key={key} className="whitespace-nowrap px-4 py-3 text-right font-mono tabular-nums">
+        <td key={key} className="whitespace-nowrap px-3 py-3 text-right font-mono tabular-nums">
           {value == null ? (
             <span className="text-base-content/50">—</span>
           ) : (
-            <div className="flex flex-col items-end gap-1.5">
-              <span className={cn("font-bold", sortKey === key && "text-primary")}>{fmt(value)}</span>
-              {bar && (
-                <div className="h-1.5 w-16 overflow-hidden rounded-full bg-base-200">
-                  <div
-                    className={cn("h-full rounded-full transition-all duration-500", TIER_BARS[bar.tier])}
-                    style={{ width: `${bar.pct}%` }}
-                  />
-                </div>
-              )}
-            </div>
+            <span
+              className={cn("font-bold", sortKey === key && "text-primary")}
+              title={bar ? `Relative cost: ${bar.pct}% of priciest` : undefined}
+            >
+              {fmt(value)}
+            </span>
           )}
         </td>
       );
@@ -192,8 +187,8 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
 
   return (
     <div className="rounded-box border border-base-300 bg-base-100">
-      <div className="overflow-x-auto">
-        <table className="table w-full min-w-[1000px]">
+      <div>
+        <table className="table w-full">
           <thead>
             <tr className="bg-base-200">
               {columns.map((col) => {
@@ -204,7 +199,7 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
                     scope="col"
                     aria-sort={active ? (sortDir === "asc" ? "ascending" : "descending") : undefined}
                     className={cn(
-                      "whitespace-nowrap px-4 py-3.5 text-sm font-bold uppercase tracking-wide",
+                      "whitespace-nowrap px-3 py-3 text-xs font-bold uppercase tracking-wide",
                       col.align === "right" ? "text-right" : "text-left",
                       active ? "text-primary" : "text-base-content/60"
                     )}
@@ -246,11 +241,11 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
             )}
             {rows.map((row, i) => (
               <tr key={row.model.model} className="hover:bg-base-200">
-                <td className="whitespace-nowrap px-4 py-3">
-                  <div className="flex items-center gap-3">
+                <td className="whitespace-nowrap px-3 py-3">
+                  <div className="flex items-center gap-2">
                     <span
                       className={cn(
-                        "badge badge-lg px-3 font-bold",
+                        "badge px-2.5 font-bold",
                         ["badge-primary", "badge-secondary", "badge-accent", "badge-neutral"][i % 4]
                       )}
                     >
