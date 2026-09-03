@@ -87,7 +87,7 @@ export function ThemePicker() {
                 role="option"
                 aria-selected={t.id === theme}
                 onClick={() => pick(t)}
-                className={cn("flex items-center gap-3 font-bold", t.id === theme && "active")}
+                className={cn("flex cursor-pointer items-center gap-3 font-bold", t.id === theme && "active")}
               >
                 <ThemeSwatch swatch={t.swatch} />
                 <span className="flex-1">{t.label}</span>

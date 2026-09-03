@@ -25,7 +25,7 @@ export function SearchInput({ value, onChange }: SearchInputProps) {
           onClick={() => onChange("")}
           aria-label="Clear search"
           title="Clear search"
-          className="absolute right-2 top-1/2 grid h-7 w-7 -translate-y-1/2 place-items-center rounded-full text-base-content/50 transition-colors hover:bg-base-200 hover:text-base-content"
+          className="absolute right-2 top-1/2 grid h-7 w-7 -translate-y-1/2 cursor-pointer place-items-center rounded-full text-base-content/50 transition-colors hover:bg-base-200 hover:text-base-content"
         >
           <X className="h-4 w-4" aria-hidden />
         </button>

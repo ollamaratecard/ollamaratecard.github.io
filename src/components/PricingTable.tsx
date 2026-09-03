@@ -211,7 +211,7 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
                   >
                     <button
                       onClick={() => onSort(col.key)}
-                      className="inline-flex items-center gap-1 transition-colors hover:text-primary"
+                      className="inline-flex cursor-pointer items-center gap-1 transition-colors hover:text-primary"
                       title={`Sort by ${col.header}`}
                     >
                       {col.header}
