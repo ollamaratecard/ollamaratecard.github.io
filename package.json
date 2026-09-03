@@ -7,7 +7,7 @@
         "build:dev": "vite build --mode development",
         "deploy": "gh-pages -d dist",
         "dev": "vite",
-        "check:types": "tsc --noEmit",
+        "check:types": "tsc -p tsconfig.app.json",
         "lint": "biome check .",
         "lint:fix": "biome check --write .",
         "preview": "vite preview",
