@@ -11,7 +11,7 @@ export function PlanToggle({ plans, selectedId, onSelect }: PlanToggleProps) {
     <div
       role="tablist"
       aria-label="Subscription plan"
-      className="inline-flex flex-wrap gap-1 rounded-2xl border border-border bg-muted p-1.5"
+      className="inline-flex flex-wrap gap-1 rounded-box border border-base-300 bg-base-200 p-1.5"
     >
       {plans.map((plan) => {
         const active = plan.id === selectedId;
@@ -21,10 +21,8 @@ export function PlanToggle({ plans, selectedId, onSelect }: PlanToggleProps) {
             role="tab"
             aria-selected={active}
             onClick={() => onSelect(plan.id)}
-            className={`rounded-xl px-4 py-2 text-sm font-extrabold transition-all duration-200 ${
-              active
-                ? "bg-primary text-primary-foreground shadow-md shadow-primary/30 scale-[1.03]"
-                : "text-muted-foreground hover:bg-card hover:text-foreground"
+            className={`btn btn-sm rounded-field px-4 ${
+              active ? "btn-primary" : "btn-ghost"
             }`}
           >
             {plan.label}

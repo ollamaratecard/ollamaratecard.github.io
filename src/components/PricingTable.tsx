@@ -108,8 +108,8 @@ const columns: ColumnDef[] = [
   { key: "blendedEffective", header: "Blended (effective)", sub: "3:1 in:out, w/ plan", align: "right" },
 ];
 
-// Tier colors derive from the active daisyUI theme (cheap → expensive)
-const TIER_BARS = ["tier-0", "tier-1", "tier-2", "tier-3"];
+// Tier bars use the theme's own status colors (cheap → expensive)
+const TIER_BARS = ["bg-success", "bg-warning", "bg-error", "bg-neutral"];
 
 function tierFor(value: number, max: number, min: number): number {
   if (max <= min) return 0;
@@ -172,12 +172,12 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
       return (
         <td key={key} className="whitespace-nowrap px-4 py-3 text-right font-mono tabular-nums">
           {value == null ? (
-            <span className="text-muted-foreground">—</span>
+            <span className="text-base-content/50">—</span>
           ) : (
             <div className="flex flex-col items-end gap-1.5">
               <span className={cn("font-bold", sortKey === key && "text-primary")}>{fmt(value)}</span>
               {bar && (
-                <div className="h-1.5 w-16 overflow-hidden rounded-full bg-muted">
+                <div className="h-1.5 w-16 overflow-hidden rounded-full bg-base-200">
                   <div
                     className={cn("h-full rounded-full transition-all duration-500", TIER_BARS[bar.tier])}
                     style={{ width: `${bar.pct}%` }}
@@ -191,11 +191,11 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
     });
 
   return (
-    <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-xl shadow-primary/10">
+    <div className="rounded-box border border-base-300 bg-base-100">
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[1000px] border-collapse text-sm">
+        <table className="table table-sm w-full min-w-[1000px]">
           <thead>
-            <tr className="bg-muted/80">
+            <tr className="bg-base-200">
               {columns.map((col) => {
                 const active = sortKey === col.key;
                 return (
@@ -204,14 +204,14 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
                     scope="col"
                     aria-sort={active ? (sortDir === "asc" ? "ascending" : "descending") : undefined}
                     className={cn(
-                      "whitespace-nowrap px-4 py-3.5 text-xs font-extrabold uppercase tracking-wide",
+                      "whitespace-nowrap px-4 py-3.5 text-xs font-bold uppercase tracking-wide",
                       col.align === "right" ? "text-right" : "text-left",
-                      active ? "text-primary" : "text-muted-foreground"
+                      active ? "text-primary" : "text-base-content/60"
                     )}
                   >
                     <button
                       onClick={() => onSort(col.key)}
-                      className="inline-flex items-center gap-1 rounded-md transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      className="inline-flex items-center gap-1 transition-colors hover:text-primary"
                       title={`Sort by ${col.header}`}
                     >
                       {col.header}
@@ -223,7 +223,7 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
                         ))}
                     </button>
                     {col.sub && (
-                      <span className="block text-[10px] font-semibold normal-case tracking-normal text-muted-foreground/70">
+                      <span className="block text-[10px] font-medium normal-case tracking-normal text-base-content/50">
                         {col.sub}
                       </span>
                     )}
@@ -235,23 +235,23 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
           <tbody>
             {rows.length === 0 && (
               <tr>
-                <td colSpan={columns.length} className="px-4 py-16 text-center text-muted-foreground">
+                <td colSpan={columns.length} className="px-4 py-16 text-center text-base-content/60">
                   <span className="text-4xl" role="img" aria-label="shrug">
                     🤷
                   </span>
                   <p className="mt-3 font-bold">No models match your search.</p>
-                  <p className="text-sm">Try a different name — e.g. “glm” or “kimi”.</p>
+                  <p className="text-sm">Try a different name — e.g. glm or kimi.</p>
                 </td>
               </tr>
             )}
             {rows.map((row, i) => (
-              <tr key={row.model.model} className="border-t border-border/70 transition-colors hover:bg-secondary/60">
+              <tr key={row.model.model} className="hover:bg-base-200">
                 <td className="whitespace-nowrap px-4 py-3">
                   <div className="flex items-center gap-2.5">
                     <span
                       className={cn(
-                        "grid h-7 w-7 shrink-0 place-items-center rounded-lg text-xs font-black",
-                        ["avatar-0", "avatar-1", "avatar-2", "avatar-3"][i % 4]
+                        "badge badge-sm font-bold",
+                        ["badge-primary", "badge-secondary", "badge-accent", "badge-neutral"][i % 4]
                       )}
                     >
                       {row.model.model.charAt(0).toUpperCase()}
@@ -265,14 +265,14 @@ export function PricingTable({ rows, plan, sortKey, sortDir, onSort }: PricingTa
           </tbody>
         </table>
       </div>
-      <div className="border-t border-border bg-muted/50 px-4 py-2.5 text-xs font-semibold text-muted-foreground">
-        Showing <span className="font-extrabold text-foreground">{rows.length}</span> of{" "}
-        <span className="font-extrabold text-foreground">{models.length}</span> models · sorted by{" "}
-        <span className="font-extrabold text-primary">
+      <div className="border-t border-base-300 bg-base-200/50 px-4 py-2.5 text-xs font-medium text-base-content/70">
+        Showing <span className="font-bold text-base-content">{rows.length}</span> of{" "}
+        <span className="font-bold text-base-content">{models.length}</span> models · sorted by{" "}
+        <span className="font-bold text-primary">
           {sortIndex >= 0 ? columns[sortIndex].header.toLowerCase() : "—"}
         </span>{" "}
         ({sortDir === "asc" ? "low → high" : "high → low"}) · plan multiplier{" "}
-        <span className="font-extrabold text-primary">{multiplierFor(plan).toFixed(2)}×</span>
+        <span className="font-bold text-primary">{multiplierFor(plan).toFixed(2)}×</span>
       </div>
     </div>
   );

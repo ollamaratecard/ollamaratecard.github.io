@@ -128,24 +128,3 @@
   height: 8px;
   border-radius: 9999px;
 }
-
-/* Price-tier bars (cheap → expensive), derived from the active theme */
-.tier-0 { background-color: var(--color-success); }
-.tier-1 { background-color: color-mix(in oklab, var(--color-success) 55%, var(--color-warning)); }
-.tier-2 { background-color: var(--color-warning); }
-.tier-3 { background-color: var(--color-error); }
-
-/* Row avatar chips cycle through theme colors instead of fixed palette colors */
-.avatar-0 { background-color: var(--color-primary); color: var(--color-primary-content); }
-.avatar-1 { background-color: var(--color-secondary); color: var(--color-secondary-content); }
-.avatar-2 { background-color: var(--color-accent); color: var(--color-accent-content); }
-.avatar-3 { background-color: var(--color-neutral); color: var(--color-neutral-content); }
-
-/* Page glow follows the theme's primary color */
-.theme-glow {
-  background-image: radial-gradient(
-    ellipse at top,
-    color-mix(in oklab, var(--color-primary) 8%, transparent),
-    transparent 55%
-  );
-}

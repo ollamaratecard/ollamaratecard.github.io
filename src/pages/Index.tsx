@@ -50,16 +50,16 @@ export default function Index() {
           <div className="flex items-center gap-3">
             <AppLogo />
             <div>
-              <h1 className="text-2xl font-black tracking-tight sm:text-3xl">
+              <h1 className="text-3xl font-bold tracking-tight">
                 Ollama<span className="text-primary">RateCard</span>
               </h1>
-              <p className="text-sm font-semibold text-muted-foreground">
+              <p className="text-sm font-medium text-base-content/60">
                 Ollama pricing, decoded — see what your plan actually costs per token
               </p>
             </div>
           </div>
           <div className="flex items-center gap-2 self-start">
-            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-bold shadow-sm">
+            <div className="badge badge-lg badge-outline gap-2 p-4 font-bold">
               <Sparkles className="h-4 w-4 text-primary" aria-hidden />
               {plans.length} plans · {multiplier.toFixed(1)}× effective
             </div>
@@ -68,23 +68,23 @@ export default function Index() {
         </header>
 
         {/* Controls */}
-        <section className="mt-8 rounded-3xl border border-border bg-card p-5 shadow-lg shadow-primary/10 sm:p-6">
+        <section className="card mt-8 border border-base-300 bg-base-100 p-5 sm:p-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div>
-              <h2 className="text-sm font-extrabold uppercase tracking-wide text-muted-foreground">
+              <h2 className="text-sm font-bold uppercase tracking-wide text-base-content/60">
                 Subscription plan
               </h2>
               <div className="mt-3">
                 <PlanToggle plans={plans} selectedId={planId} onSelect={setPlanId} />
               </div>
-              <p className="mt-3 flex max-w-xl items-start gap-2 text-xs font-semibold text-muted-foreground">
+              <p className="mt-3 flex max-w-xl items-start gap-2 text-xs font-medium text-base-content/60">
                 <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" aria-hidden />
                 Your plan's monthly credits are what make these rates cheaper than listed. Once you
                 use them up, pricing reverts to standard.
               </p>
             </div>
             <div className="shrink-0">
-              <h2 className="text-sm font-extrabold uppercase tracking-wide text-muted-foreground">
+              <h2 className="text-sm font-bold uppercase tracking-wide text-base-content/60">
                 Find a model
               </h2>
               <div className="mt-3">
@@ -94,13 +94,13 @@ export default function Index() {
           </div>
           {/* Plan math */}
           <div className="mt-5 flex flex-wrap gap-2 text-xs font-bold">
-            <span className="rounded-full bg-secondary px-3 py-1.5 text-secondary-foreground">
+            <span className="badge badge-secondary font-bold">
               ${plan.monthlyCost}/mo cost
             </span>
-            <span className="rounded-full bg-secondary px-3 py-1.5 text-secondary-foreground">
+            <span className="badge badge-secondary font-bold">
               ${plan.monthlyCredits.toLocaleString()} included credits
             </span>
-            <span className="rounded-full bg-accent px-3 py-1.5 text-accent-foreground">
+            <span className="badge badge-accent font-bold">
               {multiplier.toFixed(2)}× effective multiplier
             </span>
           </div>
@@ -117,7 +117,7 @@ export default function Index() {
           />
         </section>
 
-        <footer className="mt-8 pb-4 text-center text-xs font-semibold text-muted-foreground">
+        <footer className="mt-8 pb-4 text-center text-xs font-medium text-base-content/60">
           Prices are manually curated in <code className="font-mono">src/data/models.ts</code> and
           valued at listed rates. Not affiliated with any model provider.
         </footer>
