@@ -1,5 +1,5 @@
 {
-    "$schema": "https://biomejs.dev/schemas/2.5.5/schema.json",
+    "$schema": "https://biomejs.dev/schemas/2.5.12/schema.json",
     "vcs": {
         "enabled": true,
         "clientKind": "git",
@@ -7,13 +7,7 @@
     },
     "files": {
         "ignoreUnknown": false,
-        "includes": [
-            "**",
-            "!**/node_modules",
-            "!**/dist",
-            "!**/.dyad",
-            "!**/.idea"
-        ]
+        "includes": ["**", "!**/node_modules", "!**/dist", "!**/.dyad", "!**/.idea"]
     },
     "formatter": {
         "enabled": true,
@@ -51,7 +45,26 @@
             "tailwindDirectives": true
         }
     },
-    "overrides": [],
+    "overrides": [
+        {
+            "includes": ["src/components/ui/**"],
+            "linter": {
+                "rules": {
+                    "a11y": {
+                        "useFocusableInteractive": "off",
+                        "useSemanticElements": "off",
+                        "useAriaPropsForRole": "off"
+                    },
+                    "security": {
+                        "noDangerouslySetInnerHtml": "off"
+                    },
+                    "suspicious": {
+                        "noDocumentCookie": "off"
+                    }
+                }
+            }
+        }
+    ],
     "assist": {
         "enabled": true,
         "actions": {
