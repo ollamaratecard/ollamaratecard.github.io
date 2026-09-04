@@ -130,6 +130,7 @@ export default function Index() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="link link-hover text-primary"
+                        onClick={() => track('outbound link', { url: PRICING_SOURCE_URL, context: 'pricing footer' })}
                     >
                         ollama.com/pricing
                     </a>{' '}
