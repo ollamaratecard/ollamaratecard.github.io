@@ -63,6 +63,8 @@ e2e-tests/               # Playwright specs (bun run test:e2e)
 
 The table, sorting, and blended calculations pick it up automatically. Prices are per **million tokens, USD**.
 
+**Pricing source & date** — prices come from [ollama.com/pricing](https://ollama.com/pricing) and were last verified **September 3rd, 2026**. The source URL and as-of date live as constants at the top of [`src/data/models.ts`](src/data/models.ts) (`PRICING_SOURCE_URL`, `PRICES_AS_OF`) and render in the site footer. A future sync script can pull fresh rates from the source URL and bump `PRICES_AS_OF`.
+
 **Add or change a plan** — edit [`src/data/plans.ts`](src/data/plans.ts). The effective multiplier is computed from `monthlyCredits / monthlyCost`; everything else derives from it.
 
 **Run the tests**

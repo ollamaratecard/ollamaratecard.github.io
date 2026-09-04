@@ -4,6 +4,7 @@ import { AppLogo } from '@/components/AppLogo';
 import { PlanToggle } from '@/components/PlanToggle';
 import { buildRows, PricingTable, type SortDir, type SortKey, sortRows } from '@/components/PricingTable';
 import { SearchInput } from '@/components/SearchInput';
+import { PRICES_AS_OF, PRICING_SOURCE_URL } from '@/data/models';
 import { multiplierFor, plans } from '@/data/plans';
 import { track } from '@/lib/analytics';
 
@@ -123,8 +124,23 @@ export default function Index() {
                 </section>
 
                 <footer className="mt-8 pb-4 text-center text-sm font-medium text-base-content/60">
-                    Prices are manually curated in <code className="font-mono">src/data/models.ts</code> and valued at
-                    listed rates. Not affiliated with any model provider.
+                    Prices from{' '}
+                    <a
+                        href={PRICING_SOURCE_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="link link-hover text-primary"
+                    >
+                        ollama.com/pricing
+                    </a>{' '}
+                    as of{' '}
+                    {new Date(`${PRICES_AS_OF}T00:00:00`).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                    })}
+                    , curated in <code className="font-mono">src/data/models.ts</code>. Not affiliated with any model
+                    provider.
                 </footer>
             </div>
         </div>

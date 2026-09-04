@@ -1,3 +1,8 @@
+// Single source of truth for pricing metadata — the future price-sync script
+// should update PRICES_AS_OF (and the rows below) when it pulls fresh rates.
+export const PRICING_SOURCE_URL = 'https://ollama.com/pricing';
+export const PRICES_AS_OF = '2026-09-03'; // September 3rd, 2026
+
 export interface ModelPrice {
     model: string;
     inputPer1M: number; // USD
